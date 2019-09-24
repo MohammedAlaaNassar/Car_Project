@@ -13,9 +13,9 @@
 
 
 
-#define MAX_NUMBER_OF_PINS (uint8)32
 
-#define MAPPING(REG)  ( *( volatile uint8*) REG )
+
+#define MAPPING(REG)  ( *( volatile uint8*) (REG) )
 
 
 /* Status Register */
@@ -35,30 +35,30 @@
 /******************* PORTS *******************/
 
 /* Port D */
-#define PIND     MAPPING(0x10)
-#define DDRD     MAPPING(0x11)
-#define PORTD    MAPPING(0x12)
+#define PIND     MAPPING(0x30)
+#define DDRD     MAPPING(0x31)
+#define PORTD    MAPPING(0x32)
 
 // Bit numbers
 
 /* Port C */
-#define PINC     MAPPING(0x13)
-#define DDRC     MAPPING(0x14)
-#define PORTC    MAPPING(0x15)
+#define PINC     MAPPING(0x33)
+#define DDRC     MAPPING(0x34)
+#define PORTC    MAPPING(0x35)
 
 // Bit numbers
 
 /* Port B */
-#define PINB     MAPPING(0x16)
-#define DDRB     MAPPING(0x17)
-#define PORTB    MAPPING(0x18)
+#define PINB     MAPPING(0x36)
+#define DDRB     MAPPING(0x37)
+#define PORTB    MAPPING(0x38)
 
 // Bit numbers
 
 /* Port A */
-#define PINA     MAPPING(0x19)
-#define DDRA     MAPPING(0x1A)
-#define PORTA    MAPPING(0x1B)
+#define PINA     MAPPING(0x39)
+#define DDRA     MAPPING(0x3A)
+#define PORTA    MAPPING(0x3B)
 
 
 /******************* Timers *******************/
