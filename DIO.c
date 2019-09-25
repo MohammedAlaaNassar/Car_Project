@@ -8,6 +8,58 @@
 
 #include "DIO.h"
 
+ACK DIO_init_PIN(uint8 PORT ,uint8 PIN,uint8 DIRECTION){
+	ACK STATE = AK;
+	 switch (PORT)
+		  				{
+		                case PORT_A:
+							if (DIRECTION == OUTPUT)
+							{
+								DDRA |=(1u<<PIN);
+							}
+							else if (DIRECTION == INPUT)
+							{
+								DDRA &=~(1u<<PIN);
+							}
+						break;
+						case PORT_B:
+							if (DIRECTION == OUTPUT)
+							{
+								DDRB |=(1u<<PIN);
+							}
+							else if (DIRECTION == INPUT)
+							{
+								DDRB &=~(1u<<PIN);
+							}
+						break;
+						case PORT_C:
+							if (DIRECTION == OUTPUT)
+							{
+								DDRC |=(1u<<PIN);
+							}
+							else if (DIRECTION == INPUT)
+							{
+								DDRC &=~(1u<<PIN);
+							}
+						break;
+						case PORT_D:
+							if (DIRECTION == OUTPUT)
+							{
+								DDRD |=(1u<<PIN);
+							}
+							else if ( DIRECTION == INPUT)
+							{
+								DDRD &=~(1u<<PIN);
+							}
+						break;
+
+						default:
+							STATE=NAK;
+							break;
+		  				}
+
+	return STATE ;
+}
 
 
 

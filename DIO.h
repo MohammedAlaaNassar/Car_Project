@@ -13,12 +13,12 @@
 
 
 
-typedef enum {AK,NAK} ACK;
+
 
 ACK DIO_init(void);
 ACK DIO_read(uint8 PORT ,uint8 PIN,uint8 *VALUE);
 ACK DIO_write(uint8 PORT ,uint8 PIN,uint8 VALUE);
-
+ACK DIO_init_PIN(uint8 PORT ,uint8 PIN,uint8 DIRECTION );
 
 
 
