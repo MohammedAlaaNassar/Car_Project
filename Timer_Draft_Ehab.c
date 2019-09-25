@@ -1,12 +1,13 @@
 
-#include"Timer_Draft_Ehab.h"
+
+
 #include"TIMER_cnfg.h"
 
 ACK timer_init (void)
 {
 
     ACK STATE = AK ;
-        uint8 loop_index=0 ;
+    uint8 loop_index=0 ;
 			if (NUM_OF_TIMERS > MAX_NUM_OF_TIMERS ){  STATE = NAK ; }
 
     else
@@ -108,6 +109,7 @@ ACK timer_init (void)
 
                         }
                         */
+
                         case TIMER1:
                         {
 
@@ -117,6 +119,9 @@ ACK timer_init (void)
 
                                 case NORMAL_MODE:
                                     {
+                                        TCNT1H=0;
+                                        TCNT1L=0;
+                                        //TCNT1=0;
                                         NORMAL_MODE_TIMER1();
                                         switch (TIMER_cnfg_arr[loop_index].COM_mode)
                                         {
@@ -132,17 +137,19 @@ ACK timer_init (void)
                                                     break;
                                                 }
 
+                                            case CLEAR:
+                                                {
+                                                    COM_1A_CLEAR();
+                                                    break;
+                                                }
+
                                             case SET:
                                                 {
                                                     COM_1A_SET;
                                                     break;
                                                 }
 
-                                            case CLEAR:
-                                                {
-                                                    COM_1A_CLEAR();
-                                                    break;
-                                                }
+
 
                                             default:
                                                 {
@@ -157,6 +164,9 @@ ACK timer_init (void)
 
                                     case CTC_MODE:
                                     {
+                                        TCNT1H=0;
+                                        TCNT1L=0;
+                                        //TCNT1=0;
                                         CTC_OCR1A_MODE_TIMER1();
                                         switch (TIMER_cnfg_arr[loop_index].COM_mode)
                                         {
@@ -322,6 +332,14 @@ ACK timer_init (void)
 
                         }
 
+                        /*
+                    case TIMER2:
+                        {
+
+                            break;
+                        }
+                          */
+
                     }
 
                     default
@@ -335,67 +353,29 @@ ACK timer_init (void)
 
 
     }
-    return STATE;
+    return ACK;
 }
 
 
 
-void Timer_Delay ( float Required_Delay)
+
+
+ACK Time_Delay ( TIMER_t Timer_Select , float Required_Delay  )
 {
+    ACK STATE =AK;
+	uint16 Frequency_of_Timer;
 
-
-	Time_Delay ( Prescalar_Factor , Required_Delay  );
-
-	Prescalar_Factor_config(Prescalar_Factor);
-
-	    switch(TIMER_cnfg_arr[loop_index].timer)
-           {
-
-             case TIMER0: //need to be modified
-                 {
-                     	DDR_TIMER_0 |= ( 1<< OC);
-                     	break;
-                 }
-
-            case TIMER1:
-                 {
-                     	DDR_TIMER_1 |= ( 1<< OC1A);
-                     	break;
-                 }
-
-            case TIMER2://need to be modified
-                 {
-                     	DDR_TIMER_2 |= ( 1<< OC1A);
-                     	break;
-                 }
-
-            default:
-                {
-                    // Should not be here
-                    break;
-
-                }
-
-           }
-
-
-}
-
-
-void Time_Delay ( TIMER_t Timer_Select , float Required_Delay  )
-{
-	unsigned long Frequency_of_Timer_1;
 
 	Required_Delay = (Required_Delay) * (10000000);  //seven zeros
 
-	Frequency_of_Timer_1 =  (unsigned long) (F_CPU / TIMER_cnfg_arr[Timer_Select].prescalar) ;
+	Frequency_of_Timer =  (unsigned long) (F_CPU / TIMER_cnfg_arr[Timer_Select].prescalar) ;
+
 
 	if(TIMER_cnfg_arr[Timer_Select].timer == CTC_MODE)
-    {
+  {
     unsigned long OCR_Value ;
 
-	OCR_Value =  Required_Delay * Frequency_of_Timer_1 ;
-
+	OCR_Value =  Required_Delay * Frequency_of_Timer ;
 	OCR_Value = OCR_Value/10000000;					//seven zeros
 
      switch(TIMER_cnfg_arr[Timer_Select].timer)
@@ -408,7 +388,9 @@ void Time_Delay ( TIMER_t Timer_Select , float Required_Delay  )
 
             case TIMER1:
                  {
-                     	OCR1A = (unsigned short) OCR_Value;
+                     	OCR1AH =  OCR_Value/256;
+                     	OCR1AL =  OCR_Value%256;
+                     	//OCR1A = (unsigned short) OCR_Value;
                      	break;
                  }
 
@@ -422,7 +404,7 @@ void Time_Delay ( TIMER_t Timer_Select , float Required_Delay  )
                 {
                     // Should not be here
                     break;
-
+                    STATE=NAK;
                 }
 
            }
@@ -431,29 +413,37 @@ void Time_Delay ( TIMER_t Timer_Select , float Required_Delay  )
     else if (TIMER_cnfg_arr[Timer_Select].timer == NORMAL_MODE)
 
         {
-             unsigned long Preloaded_Value ;
+            uint16 Top=0;
+            uint16 Preloaded_Value=0 ;
 
-	Preloaded_Value =  Required_Delay * Frequency_of_Timer_1 ;
-
-	Preloaded_Value = Preloaded_Value/10000000;					//seven zeros
-
-     switch(TIMER_cnfg_arr[Timer_Select].timer)
+       switch(TIMER_cnfg_arr[Timer_Select].timer)
         {
              case TIMER0:   //need to be modified
                  {
+                        Top=255;
+                     	Preloaded_Value = (Top - (Required_Delay * Frequency_of_Timer)) ;
+	                    Preloaded_Value = Preloaded_Value/10000000;					//seven zeros
                      	TCNT0 = (unsigned char) Preloaded_Value;
                      	break;
                  }
 
             case TIMER1:
                  {
-                     	OCR1A = (unsigned short) Preloaded_Value;
+                        Top=65535;
+                        Preloaded_Value =  (Top - (Required_Delay * Frequency_of_Timer)) ;
+	                    Preloaded_Value = Preloaded_Value/10000000;					//seven zeros
+                     	TCNT1H =  Preloaded_Value/256;
+                     	TCNT1L =  Preloaded_Value%256;
+                     	//TCNT1 = (unsigned short) Preloaded_Value;
                      	break;
                  }
 
             case TIMER2:  //need to be modified
                  {
-                      	OCR2 = (unsigned char) Preloaded_Value;
+                        Top=255;
+                     	Preloaded_Value = (Top - (Required_Delay * Frequency_of_Timer));
+	                    Preloaded_Value = Preloaded_Value/10000000;					//seven zeros
+                      	TCNT2 = (unsigned char) Preloaded_Value;
                      	break;
                  }
 
@@ -461,6 +451,7 @@ void Time_Delay ( TIMER_t Timer_Select , float Required_Delay  )
                 {
                     // Should not be here
                     break;
+                    STATE=NAK;
 
                 }
 
@@ -468,13 +459,17 @@ void Time_Delay ( TIMER_t Timer_Select , float Required_Delay  )
 
         }
 
-
         else
         {
-
+             // Should not be here
+            return STATE;
         }
+
     }
-    Timer_Start ( Timer_Select );
+
+    STATE = Timer_Start ( Timer_Select );
+
+    return STATE;
 }
 
 
@@ -500,6 +495,7 @@ ACK Timer_Start ( TIMER_t Timer_Select )
 
             switch (Timer_Select)
            {
+               /*
               case TIMER0:
              {
                 switch(TIMER_cnfg_arr[loop_index].prescalar)
@@ -554,6 +550,7 @@ ACK Timer_Start ( TIMER_t Timer_Select )
 
                 break;
             }
+            */
 
 
             case TIMER1:
@@ -614,7 +611,7 @@ ACK Timer_Start ( TIMER_t Timer_Select )
             }
 
 
-
+        /*
             case TIMER2:
              {
 
@@ -670,7 +667,7 @@ ACK Timer_Start ( TIMER_t Timer_Select )
                 }
                 break;
             }
-
+            */
 
             default:
                 {
