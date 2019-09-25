@@ -11,7 +11,8 @@
 
 #include "reg_lib.h"
 
-typedef enum {led,motor,button,NUM_OF_PINS}PINS_t; // types
+
+typedef enum {SWITCH=2,led=6,NUM_OF_PINS=8}PINS_t; // types
 
 #define PORT_A              'A'
 #define PORT_B              'B'
