@@ -207,7 +207,9 @@
 // These are the types of Operation for Normal and CTC mode using OCR1A Register:-
 
 /* COM_Mode_no = 0*/
-#define COM_1A_NORMAL	  TCCR1A &= (~(1<<COM1A1) & ~(1<<COM1A0))
+#define COM_1A_NORMAL()	do{\
+							TCCR1A &= (~(1<<COM1A1)) & (~(1<<COM1A0)) ;\
+						  }while(0)
 
 
 /* COM_Mode_no = 1*/
@@ -250,7 +252,9 @@
 								   }while(0)
 
 /* COM_Mode_no = 3*/
-#define COM_1A_PWM_INVERTED			TCCR1A |= (1<<COM1A1) | (1<<COM1A0)
+#define COM_1A_PWM_INVERTED()		do{\
+									TCCR1A |= (1<<COM1A1) | (1<<COM1A0);\
+									}while(0)
 
 
 
@@ -258,7 +262,7 @@
 
 //---------------------------------------------------------------------------//
 //Enable Global Interrupt
-#define ENABLE_GLOBAL_INTERRUPT  SREG |= 1u<<I
+#define ENABLE_GLOBAL_INTERRUPT  SREG |= 1u<<7
 
 
 //Configure TIMSK for interrupt for Timer 1 :-
