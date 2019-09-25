@@ -15,7 +15,7 @@ typedef signed short sint16;
 typedef unsigned long uint32;
 typedef signed long sint32;
 
-
+typedef enum {AK,NAK} ACK;
 
 
 #endif /* STD_TYPES_H_ */
