@@ -9,11 +9,10 @@
 #define TIMER_CNFG_H_
 
 
-
 #include "reg_lib.h"
 #include "TIMER1_cnfg.h"
 
-typedef enum {timer0=0,timer1,timer2,NUM_OF_TIMERS}TIMER_t; // types
+typedef enum {timer0,timer1,timer2,NUM_OF_TIMERS}TIMER_t; // types
 
 #define MAX_NUM_OF_TIMERS 3
 
@@ -23,52 +22,32 @@ typedef enum {timer0=0,timer1,timer2,NUM_OF_TIMERS}TIMER_t; // types
 #define TIMER2    2
 
 /* PRESCALER */
-/*
-typedef enum
-{
-    // PRESCALER //
- PRESCALER0 =  1,
- PRESCALER8 =  8,
- PRESCALER64 = 64,
- PRESCALER256 = 256,
- PRESCALER1024 = 1024,
- EXTERNAL_CLK_RISING = 5,
- EXTERNAL_CLK_FALLING = 6
-}prescalar_factor_t;
-*/
-
-/*
-#define PRESCALER0             1u
-#define PRESCALER8             8u
-#define PRESCALER64            64u
-#define PRESCALER256           256u
-#define PRESCALER1024         1024
-#define EXTERNAL_CLK_RISING    5u
-#define EXTERNAL_CLK_FALLING   6u 
-*/
-
 #define PRESCALER0             0
 #define PRESCALER8             1
 #define PRESCALER64            2
 #define PRESCALER256           3
 #define PRESCALER1024          4
-#define EXTERNAL_CLK_RISING	   5
+#define EXTERNAL_CLK_RISING    5
 #define EXTERNAL_CLK_FALLING   6
 
+/* PRESCALER TIMER 2 */
+#define PRESCALER32             7
+#define PRESCALER128            8
+
 /* WGM MODE */
-#define NORMAL_MODE        1
-#define CTC_MODE           2
-#define FAST_PWM_MODE      3
-#define PHASE_CORRECT_MODE 4
+#define NORMAL_MODE        0
+#define CTC_MODE           1
+#define FAST_PWM_MODE      2
+#define PHASE_CORRECT_MODE 3
 
 /* COM MODE */
-#define NORMAL  1
-#define TOGGLE  2
-#define CLEAR   3
-#define SET     4
+#define NORMAL  0
+#define TOGGLE  1
+#define CLEAR   2
+#define SET     3
 /* PWM MODE */
-#define INVERTING 	   5
-#define NON_INVERTING  6
+#define INVERTING 	   4
+#define NON_INVERTING  5
 
 /* INTERRUPT */
 #define INTERRUPT     1
@@ -93,15 +72,11 @@ typedef struct
   uint8 COM_mode;
   uint8 interrupt;
   uint8 ICU;
-  uint8 prescalar;
   uint8 IS_init;
- 
-  
+  uint8 prescalar;
 } TIMER_cnfg_t ;
-
 
 
 extern TIMER_cnfg_t TIMER_cnfg_arr[NUM_OF_TIMERS];
 
 #endif /* TIMER_CNFG_H_ */
-
