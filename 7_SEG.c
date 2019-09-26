@@ -6,19 +6,13 @@
  */
 
 
-#include "reg_lib.h"
+ #include"7_SEG.h"
 
 
 
-#define SEG_PORT PORTB
-#define SEG_PINS ( (0xF0)&(PORTB) )
+void SEG_write(uint8 NUM)
+{
 
-
-
-ACK SEG_write(uint8 NUM){
-
-
-	SEG_PORT = SEG_PINS | (NUM & 0x0F);
-
-return AK ;
+	SEG_PORT = (SEG_PINS | (NUM & 0x0F));
+	
  }
