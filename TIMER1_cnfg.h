@@ -5,18 +5,6 @@
 
 //-------------------------------------------------------------------------------------------------//
 
-//Define Output Compare Register 1A and 1B and Input Capture Register for Timer 1:-
-
-#define DDR_TIMER_1		DDRD
-#define PORT_TIMER_1	PORTD
-#define PIN_TIMER_1		PIND
-
-#define OC1B	PD4
-#define OC1A	PD5
-#define ICP		PD6
-
-//-------------------------------------------------------------------------------------------------//
-
 //Configure Prescalar Factor for Timer 1 :-
 
 /*prescalar_index = 0*/
@@ -86,7 +74,7 @@
 
 /* mode_no = 8 */
 #define CTC_OCR1A_MODE_TIMER1() do{\
-                                  (TCCR1A) &= (~(1<<WGM10) & ~(1<<WGM11));\
+                                   TCCR1A &= (~(1<<WGM10)) & (~(1<<WGM11));\
                                    TCCR1B |= (1<<WGM12);\
                                    TCCR1B &= (~(1<<WGM13));\
                                   }while(0)
@@ -182,10 +170,6 @@
 
 //5- Configure (ICU mode) for Timer 1 using ICR Register :-
 
-#define DDR_ICU	 DDRD
-#define PORT_ICU PORTD
-#define PIN_ICU	 PIND
-
 /* Rising edge and no noise cancellation */
 #define ICU_RISING_EDGE()  do\
 							{\
@@ -214,8 +198,8 @@
 
 /* COM_Mode_no = 1*/
 #define COM_1A_TOGGLE()	do{\
-						   TCCR1A &= (~(1<<COM1A0));\
-						   TCCR1A |= (1<<COM1A1);\
+						   TCCR1A &= (~(1<<COM1A1));\
+						   TCCR1A |= (1<<COM1A0);\
 						  }while(0)
 
 /* COM_Mode_no = 2*/
