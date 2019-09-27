@@ -98,14 +98,11 @@ typedef enum {timer0,timer1,timer2,NUM_OF_TIMERS}TIMER_t; // types
 #define NOT_INITIALIZED		0
 #define POLLING				0
 
-<<<<<<< HEAD
 //Flag PWM
 #define PWM_MODE		1
 #define NON_PWM_MODE	0
 
 
-
-=======
 /* Flag_mode */
 #define PWM_MODE		1
 #define NON_PWM_MODE	0
@@ -114,7 +111,7 @@ typedef enum {timer0,timer1,timer2,NUM_OF_TIMERS}TIMER_t; // types
 #define ENABLE_OVERFLOW_INTERRUPT_TIMER0	TIMSK |= (1<<TOIE0)
 #define ENABLE_OVERFLOW_INTERRUPT_TIMER1	TIMSK |= (1<<TOIE1)
 #define ENABLE_OVERFLOW_INTERRUPT_TIMER2	TIMSK |= (1<<TOIE2)
->>>>>>> 01ddf6f6e03651ea8ba47a3da74c4c67ff775f65
+
 
 
 typedef struct
