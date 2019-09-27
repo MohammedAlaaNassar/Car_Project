@@ -14,5 +14,5 @@ void SEG_write(uint8 NUM)
 {
 
 	SEG_PORT = (SEG_PINS | (NUM & 0x0F));
-	
+
  }
