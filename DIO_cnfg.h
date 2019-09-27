@@ -12,6 +12,26 @@
 #include "reg_lib.h"
 
 
+
+
+#define _PWM_OUTPUT
+//#define TEST_LEDS
+//#define _7SEG
+
+
+		// LEDs of sprints kit PORT_B
+#define led0  PIN4
+#define led1  PIN5
+#define led2  PIN6
+#define led3  PIN7
+#define LEDs_TESTING_PORT PORT_B
+
+    // PIN FOR PWM OUTPUT
+#define PWM_PIN  PIN4
+#define PWM_PORT PORT_B
+
+
+
 typedef enum {SWITCH=2,led=6,NUM_OF_PINS=12}PINS_t; // types
 
 #define PORT_A              'A'
