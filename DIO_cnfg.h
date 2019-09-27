@@ -17,6 +17,7 @@
 #define _PWM_OUTPUT
 //#define TEST_LEDS
 //#define _7SEG
+//#define TEST_LEDS_PORTD	
 
 
 		// LEDs of sprints kit PORT_B
@@ -33,6 +34,8 @@
 
 
 typedef enum {SWITCH=2,led=6,NUM_OF_PINS=12}PINS_t; // types
+
+
 
 #define PORT_A              'A'
 #define PORT_B              'B'
