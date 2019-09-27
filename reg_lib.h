@@ -34,11 +34,19 @@
 #define PIN7                7
 //
 ///* Status Register */
+<<<<<<< HEAD
 //
 #ifndef SREG
 #define SREG     MAPPING(0x5F)
 #endif
 //
+=======
+#ifndef SREG
+#define SREG     MAPPING(0x5F)
+#endif
+
+
+>>>>>>> ca41edd7fe8fbe3bbfb8b170556407c169223178
 //// Bit numbers
 //#define   I    7
 //#define   T    6
