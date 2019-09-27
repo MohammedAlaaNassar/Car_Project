@@ -13,9 +13,11 @@
 
 DIO_cnfg_t DIO_cnfg_arr[NUM_OF_PINS] =
 {
+		/*
 		{PORT_A,PIN2,INPUT,NA,PULLDOWN,INITIALIZED},
 		{PORT_A,PIN4,INPUT,NA,PULLUP,INITIALIZED},
 		{PORT_A,PIN6,OUTPUT,LOW,NA,INITIALIZED},
+		*/
 		
 		//test LEDs for debugging//
 		{PORT_D,PIN3,OUTPUT,LOW,NA,INITIALIZED},
@@ -24,6 +26,7 @@ DIO_cnfg_t DIO_cnfg_arr[NUM_OF_PINS] =
 		{PORT_D,PIN6,OUTPUT,LOW,NA,INITIALIZED},
 		{PORT_D,PIN7,OUTPUT,LOW,NA,INITIALIZED},
 
+		/*
 		//  7-SEG 4 Data_PINS //
 		        {PORT_B,PIN0,OUTPUT,LOW,NA,INITIALIZED},
 				{PORT_B,PIN1,OUTPUT,LOW,NA,INITIALIZED},
@@ -33,6 +36,14 @@ DIO_cnfg_t DIO_cnfg_arr[NUM_OF_PINS] =
 		//  7-SEG 4 Enable_PINS //
 				 {PORT_D,PIN2,OUTPUT,HIGH,NA,INITIALIZED},
 		         {PORT_D,PIN3,OUTPUT,HIGH,NA,INITIALIZED},
-
+			*/		
+		 
+		// Enable Timer Pins
+				 {PORT_B,PIN3,OUTPUT,LOW,NA,INITIALIZED},	//OC0  timer0 it's common with Seven segment Data pin 4 
+	   	         {PORT_D,PIN4,OUTPUT,LOW,NA,INITIALIZED},	//OC1B timer1 channel B
+				 {PORT_D,PIN5,OUTPUT,LOW,NA,INITIALIZED},	//OC1A timer1 channel A
+			     {PORT_D,PIN6,OUTPUT,LOW,NA,INITIALIZED},	//ICP timer1 
+				 {PORT_D,PIN7,OUTPUT,LOW,NA,INITIALIZED}	//OC2  timer2
+		
 };
 

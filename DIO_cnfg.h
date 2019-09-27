@@ -12,7 +12,7 @@
 #include "reg_lib.h"
 
 
-typedef enum {SWITCH=2,led=6,NUM_OF_PINS=12}PINS_t; // types
+typedef enum {SWITCH=2,led=6,NUM_OF_PINS=14}PINS_t; // types
 
 #define PORT_A              'A'
 #define PORT_B              'B'
