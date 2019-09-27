@@ -17,13 +17,14 @@ DIO_cnfg_t DIO_cnfg_arr[NUM_OF_PINS] =
 		{PORT_A,PIN2,INPUT,NA,PULLDOWN,INITIALIZED},
 		{PORT_A,PIN4,INPUT,NA,PULLUP,INITIALIZED},
 		{PORT_A,PIN6,OUTPUT,LOW,NA,INITIALIZED},
-
+		*/
 #ifdef _PWM_OUTPUT
 
 		{LEDs_TESTING_PORT,led0,OUTPUT,LOW,NA,INITIALIZED},
 
 #endif
 
+/*
 #ifdef TEST_LEDS_PORTB
 		//test LEDs for debugging//
 		{LEDs_TESTING_PORT,led0,OUTPUT,LOW,NA,INITIALIZED},
@@ -32,8 +33,8 @@ DIO_cnfg_t DIO_cnfg_arr[NUM_OF_PINS] =
 		{LEDs_TESTING_PORT,led3,OUTPUT,LOW,NA,INITIALIZED},
 
 #endif
-
-		
+	*/
+	/*
 #ifdef TEST_LEDS_PORTD	
 		//test LEDs for debugging//
 		{PORT_D,PIN3,OUTPUT,LOW,NA,INITIALIZED},
@@ -42,7 +43,7 @@ DIO_cnfg_t DIO_cnfg_arr[NUM_OF_PINS] =
 		{PORT_D,PIN6,OUTPUT,LOW,NA,INITIALIZED},
 		{PORT_D,PIN7,OUTPUT,LOW,NA,INITIALIZED},
 #endif
-		
+		*/
 
 #ifdef _7SEG
 			//  7-SEG 4 Data_PINS //
