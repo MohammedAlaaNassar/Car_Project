@@ -16,6 +16,7 @@
 #include <avr/interrupt.h>
 
 #define MAX_NUMBER_OF_PINS (uint8)32
+#define F_CPU 1000000ul
 
 #define MAPPING(REG)  ( *( volatile uint8*) REG )
 #define MAPPING16(REG)  ( *( volatile uint16*) REG )
@@ -30,9 +31,11 @@
 #define PIN7                7
 //
 ///* Status Register */
-//
-//#define SREG     MAPPING(0x5F)
-//
+#ifndef SREG
+#define SREG     MAPPING(0x5F)
+#endif
+
+
 //// Bit numbers
 //#define   I    7
 //#define   T    6
