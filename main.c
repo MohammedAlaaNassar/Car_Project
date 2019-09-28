@@ -10,7 +10,7 @@
 #include "std_types.h"
 #include "reg_lib.h"
 #include "DIO.h"
-#include "Timer_Draft.h"
+#include "TIMER.h"
 #include "7_SEG.h"
 
 //define constants
